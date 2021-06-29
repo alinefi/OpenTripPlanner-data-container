@@ -94,7 +94,7 @@
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
-      "url": "http://digitransit-proxy:8080/out/tre.mattersoft.fi/api/gtfsrealtime/v1.0/feed/tripupdate",
+      "url": "https://gtfsrt.blob.core.windows.net/tampere/tripupdate",
       "feedId": "tampere",
       "fuzzyTripMatching": false
     },
