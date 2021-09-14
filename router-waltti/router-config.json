@@ -133,14 +133,6 @@
       "fuzzyTripMatching": false
     },
     {
-      "id": "oulu-bike-rental",
-      "type": "bike-rental",
-      "sourceType": "next-bike",
-      "url": "http://digitransit-proxy:8080/out/poland.nextbike.net/maps/nextbike-official.xml?domains=fo",
-      "frequencySec": 10,
-      "network": "oulu"
-    },
-    {
       "id": "lahti-alerts",
       "type": "real-time-alerts",
       "frequencySec": 30,
