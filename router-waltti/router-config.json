@@ -107,6 +107,15 @@
       "fuzzyTripMatching": false
     },
     {
+      "id": "tampere-bike-rental",
+      "type": "bike-rental",
+      "sourceType": "gbfs",
+      "url": "http://digitransit-proxy:8080/out/en-admin.sharingos.com/GBFS/1048/en/",
+      "frequencySec": 10,
+      "network": "tampere",
+      "allowOverloading": true
+    },
+    {
       "id": "foli-bike-rental",
       "type": "bike-rental",
       "sourceType": "smoove",
