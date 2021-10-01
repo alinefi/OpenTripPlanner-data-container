@@ -112,7 +112,7 @@
       "sourceType": "gbfs",
       "url": "http://digitransit-proxy:8080/out/en-admin.sharingos.com/GBFS/1048/en/",
       "frequencySec": 10,
-      "network": "tampere",
+      "network": "sharingos_tampere",
       "allowOverloading": true
     },
     {
