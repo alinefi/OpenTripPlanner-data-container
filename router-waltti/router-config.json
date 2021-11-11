@@ -232,6 +232,23 @@
       "url": "http://digitransit-proxy:8080/out/lifti.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
       "feedId": "Vaasa",
       "fuzzyTripMatching": false
+    },
+    {
+      "id": "kouvola-trip-updates",
+      "type": "stop-time-updater",
+      "frequencySec": 60,
+      "sourceType": "gtfs-http",
+      "url": "http://digitransit-proxy:8080/out/koutsi.mattersoft.fi/api/gtfsrealtime/v1.0/feed/tripupdate",
+      "feedId": "Kouvola",
+      "fuzzyTripMatching": false
+    },
+    {
+      "id": "kouvola-alerts",
+      "type": "real-time-alerts",
+      "frequencySec": 30,
+      "url": "http://digitransit-proxy:8080/out/koutsi.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
+      "feedId": "Kouvola",
+      "fuzzyTripMatching": false
     }
   ]
 }
