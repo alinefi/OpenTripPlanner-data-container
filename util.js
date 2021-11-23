@@ -68,6 +68,7 @@ const compareHashes = (headerHash, localFilePath) => {
       if (fileHash === headerHash) {
         resolve()
       } else {
+        process.stdout.write(`Local hash was: ${fileHash} and remote hash: ${headerHash} \n`)
         reject('end') // eslint-disable-line
       }
     })
