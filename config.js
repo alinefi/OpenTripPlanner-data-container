@@ -126,7 +126,7 @@ const configMap = ALL_CONFIGS.map(cfg => cfg.src)
 
 const osm = [
   { id: 'finland', url: 'https://karttapalvelu.storage.hsldev.com/finland.osm/finland.osm.pbf' },
-  { id: 'hsl', url: 'https://karttapalvelu.storage.hsldev.com/hsl.osm/hsl.osm.pbf' }
+  { id: 'hsl', url: 'https://geocoding.blob.core.windows.net/vrk/hsl1.pbf' }
 ]
 
 const dem = [
