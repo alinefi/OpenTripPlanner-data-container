@@ -48,7 +48,7 @@ const postSlackMessage = (message) => {
 /**
  * Compare size of a newly downloaded file (either from headers or from the downloaded file locally)
  * to the size of the local version of a file (either downloaded or seeded).
- * maxDifference should be a decimal of how much the size can differ from the localFile's size (i.e. 0.01 = 1%).
+ * maxDifference should be a decimal of how much smaller the new file can be than the localFile (i.e. 0.01 = 1%).
  */
 const compareSizes = (localFile, newFileSize, maxDifference) => {
   return new Promise((resolve, reject) => {
