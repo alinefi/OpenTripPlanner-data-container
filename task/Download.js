@@ -30,8 +30,7 @@ module.exports = function (entries) {
       }
       const name = entry.url.split('/').pop()
       const fileExt = name.split('.').pop()
-      const remoteHash = res.headers['content-md5']
-      const file = new Vinyl({ path: `${entry.id !== undefined ? (entry.id + '.' + fileExt) : name}`, contents: Buffer.from(body), hash: remoteHash })
+      const file = new Vinyl({ path: `${entry.id !== undefined ? (entry.id + '.' + fileExt) : name}`, contents: Buffer.from(body) })
       stream.push(file)
 
       process.stdout.write(entry.url + ' Download SUCCESS\n')

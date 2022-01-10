@@ -2,7 +2,7 @@ const fs = require('fs')
 const request = require('request')
 
 const { dataDir } = require('../config')
-const { compareHashes } = require('../util')
+const { compareSizes } = require('../util')
 
 /**
  * Download DEM files from Azure blob storage.
@@ -13,22 +13,22 @@ module.exports = function (entries) {
       const filePath = `${dataDir}/downloads/dem/${entry.id}.tif`
       const readyPath = `${dataDir}/ready/dem/${entry.id}.tif`
       let dataAlreadyExists = false
-      let downloadHash
+      let downloadSize
       const r = request(entry.url)
 
       const stream = r.pipe(fs.createWriteStream(filePath))
       r.on('response', response => {
         if (response.statusCode === 200) {
-          downloadHash = response.headers['content-md5']
-          compareHashes(downloadHash, readyPath)
+          downloadSize = response.headers['content-length']
+          compareSizes(readyPath, parseInt(downloadSize), 0)
             .then(() => {
               process.stdout.write(`Local DEM data for ${entry.id} was already up-to-date\n`)
               dataAlreadyExists = true
-              // Abort download as remote has same md5 as local copy
+              // Abort download as remote has same size as local copy
               r.abort()
             }).catch((err) => {
               if (err === 'end') {
-                process.stdout.write(`${entry.url} hash value differs from local file's hash value\n`)
+                process.stdout.write(`${entry.url} size differs from local file's size\n`)
                 process.stdout.write(`Downloading new DEM data from ${entry.url}\n`)
               } else if (err === 'error') {
                 process.stdout.write(`Failed to load local DEM data for ${entry.id}\n`)
@@ -52,7 +52,7 @@ module.exports = function (entries) {
         // However, if the file is really small, this could in theory be called before call to abort request
         // but that situation shouldn't happen with DEM data sizes.
         if (!dataAlreadyExists) {
-          compareHashes(downloadHash, filePath)
+          compareSizes(filePath, parseInt(downloadSize), 0)
             .then(() => {
               process.stdout.write(`Downloaded updated DEM data to ${filePath}\n`)
               fs.rename(filePath, readyPath, (err) => {
@@ -75,7 +75,7 @@ module.exports = function (entries) {
                 fs.unlinkSync(filePath)
               }
               if (err === 'end') {
-                process.stdout.write(`${entry.url} hash value differs from just downloaded file's hash value\n`)
+                process.stdout.write(`${entry.url} size differs from just downloaded file's size\n`)
               } else if (err === 'error') {
                 process.stdout.write(`Failed to load local DEM data for ${entry.id}\n`)
               } else {

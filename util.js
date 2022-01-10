@@ -1,7 +1,6 @@
 const JSZip = require('jszip')
 const fs = require('fs')
 const globby = require('globby')
-const crypto = require('crypto')
 
 const IncomingWebhook = require('@slack/client').IncomingWebhook
 const url = process.env.SLACK_WEBHOOK_URL || null
@@ -47,31 +46,22 @@ const postSlackMessage = (message) => {
 }
 
 /**
- * Compare Content-MD5 header md5 hash value to hash value calculated from local a copy of the file.
+ * Compare size of a newly downloaded file (either from headers or from the downloaded file locally)
+ * to the size of the local version of a file (either downloaded or seeded).
+ * maxDifference should be a decimal of how much the size can differ from the localFile's size (i.e. 0.01 = 1%).
  */
-const compareHashes = (headerHash, localFilePath) => {
+const compareSizes = (localFile, newFileSize, maxDifference) => {
   return new Promise((resolve, reject) => {
-    if (headerHash === undefined) {
+    if (newFileSize === undefined || !fs.existsSync(localFile)) {
       return resolve()
     }
-    let shasum = crypto.createHash('md5')
-    let s = fs.ReadStream(localFilePath)
-    s.on('error', function (err) {
-      process.stdout.write(err)
-      reject('error') // eslint-disable-line
-    })
-    s.on('data', function (data) {
-      shasum.update(data)
-    })
-    s.on('end', function () {
-      var fileHash = shasum.digest('base64')
-      if (fileHash === headerHash) {
-        resolve()
-      } else {
-        process.stdout.write(`Local hash was: ${fileHash} and remote hash: ${headerHash} \n`)
-        reject('end') // eslint-disable-line
-      }
-    })
+    let fileSize = fs.statSync(localFile).size
+    if (fileSize * (1 - maxDifference) >= newFileSize) {
+      resolve()
+    } else {
+      process.stdout.write(`Local file size was: ${fileSize} and remote size: ${newFileSize} \n`)
+      reject('end') // eslint-disable-line
+    }
   })
 }
 
@@ -82,5 +72,5 @@ module.exports = {
   zipWithGlob,
   routerDir: (config) => `router-${config.id}`,
   postSlackMessage,
-  compareHashes
+  compareSizes
 }
