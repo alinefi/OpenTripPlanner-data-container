@@ -6,7 +6,7 @@ const dlBlob = require('./task/DownloadDEMBlob')
 const { setFeedIdTask } = require('./task/setFeedId')
 const { OBAFilterTask } = require('./task/OBAFilter')
 const { fitGTFSTask } = require('./task/MapFit')
-const { validateBlobHash } = require('./task/BlobValidation')
+const { validateBlobSize } = require('./task/BlobValidation')
 const { testGTFSFile } = require('./task/GTFSTest')
 const Seed = require('./task/Seed')
 const prepareRouterData = require('./task/prepareRouterData')
@@ -20,11 +20,11 @@ const { postSlackMessage } = require('./util')
  * Download and test new osm data
  */
 gulp.task('osm:update', function () {
-  const map = config.ALL_CONFIGS().map(cfg => cfg.osm).concat('finland').reduce((acc, val) => { acc[val] = true; return acc }, {})
-  const urls = Object.keys(map).map(key => config.osmMap[key])
+  const osmFiles = [...new Set(config.ALL_CONFIGS().map(cfg => cfg.osm))]
+  const urls = osmFiles.length > 0 ? osmFiles.map(key => config.osmMap[key]) : [config.osmMap['finland']]
   return dl(urls, true, true)
     .pipe(gulp.dest(`${config.dataDir}/downloads/osm`))
-    .pipe(validateBlobHash())
+    .pipe(validateBlobSize())
     .pipe(testGTFSFile())
     .pipe(gulp.dest(`${config.dataDir}/ready/osm`))
 })

@@ -1,23 +1,24 @@
 const fs = require('fs')
 const through = require('through2')
-const { postSlackMessage, compareHashes } = require('../util')
+const { postSlackMessage, compareSizes } = require('../util')
 
 /**
- * Checks if local file's md5 hash matches md5 value stored in a header in Azure blob storage.
- * If there was no content-md5 header sent during download, validation is always successful
+ * Checks if downloaded file is at most 1% smaller than the seeded file.
+ * If there was no seeded file, validation is always be successful
  */
-function validateHash (localFile, headerHash) {
+function validateSize (seededFile, downloadedFile) {
   const p = new Promise((resolve, reject) => {
-    if (!fs.existsSync(localFile)) {
-      process.stdout.write(localFile + ' does not exist!\n')
+    if (!fs.existsSync(downloadedFile)) {
+      process.stdout.write(downloadedFile + ' does not exist!\n')
       p.reject()
     } else {
-      compareHashes(headerHash, localFile)
+      let downloadedFileSize = fs.statSync(downloadedFile).size
+      compareSizes(seededFile, downloadedFileSize, 0.01)
         .then(() => {
           resolve()
         }).catch((err) => {
-          process.stdout.write(localFile + ': file had different md5 hash than in blob storage\n')
-          postSlackMessage(localFile + ': file had different md5 hash than in blob storage :boom:')
+          process.stdout.write(downloadedFile + ': file had different size than the seeded file\n')
+          postSlackMessage(downloadedFile + ': file had different size than the seeded file :boom:')
           reject(err)
         })
     }
@@ -26,10 +27,11 @@ function validateHash (localFile, headerHash) {
 }
 
 module.exports = {
-  validateBlobHash: () => {
+  validateBlobSize: () => {
     return through.obj(function (file, encoding, callback) {
       const localFile = file.history[file.history.length - 1]
-      validateHash(localFile, file.hash).then(() => {
+      const seededFile = localFile.replace('/downloads/', '/ready/')
+      validateSize(seededFile, localFile).then(() => {
         callback(null, file)
       }).catch(() => {
         callback(null, null)
