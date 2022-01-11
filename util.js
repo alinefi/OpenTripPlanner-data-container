@@ -56,7 +56,7 @@ const compareSizes = (localFile, newFileSize, maxDifference) => {
       return resolve()
     }
     let fileSize = fs.statSync(localFile).size
-    if (fileSize * (1 - maxDifference) >= newFileSize) {
+    if (fileSize * (1 - maxDifference) <= newFileSize) {
       resolve()
     } else {
       process.stdout.write(`Local file size was: ${fileSize} and remote size: ${newFileSize} \n`)
