@@ -192,14 +192,6 @@
       "fuzzyTripMatching": false
     },
     {
-      "id": "lappeenranta-bike-rental",
-      "type": "bike-rental",
-      "sourceType": "kaakau",
-      "url": "http://digitransit-proxy:8080/out/ckan.saita.fi/geojson/kaupunkipyoraparkit_lpr.geojson",
-      "frequencySec": 3600,
-      "network": "lappeenranta"
-    },
-    {
       "id": "mikkeli-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
