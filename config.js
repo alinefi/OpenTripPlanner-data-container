@@ -14,7 +14,7 @@ const HSL_CONFIG = {
     src('HSL', 'https://infopalvelut.storage.hsldev.com/gtfs/hsl.zip', false),
     src('HSLlautta', 'http://lautta.net/db/gtfs_pk/gtfs.zip', false)
   ],
-  'osm': 'finland',
+  'osm': 'hsl',
   'dem': 'hsl'
 }
 
