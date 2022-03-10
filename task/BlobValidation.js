@@ -15,6 +15,7 @@ function validateSize (seededFile, downloadedFile) {
       let downloadedFileSize = fs.statSync(downloadedFile).size
       compareSizes(seededFile, downloadedFileSize, 0.01)
         .then(() => {
+	  global.blobSizeOk = 1;
           resolve()
         }).catch((err) => {
           process.stdout.write(downloadedFile + ': file had different size than the seeded file\n')
