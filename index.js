@@ -49,9 +49,16 @@ async function update () {
     start(task).then(() => { callback(null, true) })
   })
 
-  await every(updateOSM, function (task, callback) {
-    start(task).then(() => { callback(null, true) })
-  })
+  for (let i = 0; i < 3; i++) {
+    global.blobSizeOk = false // ugly hack but gulp does not return any values from tasks
+
+    await every(updateOSM, function (task, callback) {
+      start(task).then(() => { callback(null, true) })
+    })
+    if (global.blobSizeOk) {
+      break
+    }
+  }
 
   // postSlackMessage('OSM data updated');
 
