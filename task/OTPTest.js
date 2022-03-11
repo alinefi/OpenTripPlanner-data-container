@@ -7,15 +7,15 @@ const { postSlackMessage } = require('../util')
 const testTag = process.env.OTP_TAG || 'latest'
 
 /**
- * Builds an OTP graph with gtfs file. If the build is succesful we can trust
+ * Builds an OTP graph with a source data file. If the build is succesful we can trust
  * the file is good enough to be used.
  */
-function testGTFS (gtfsFile, quiet = false) {
+function testWithOTP (otpFile, quiet = false) {
   let lastLog = []
 
   const p = new Promise((resolve, reject) => {
-    if (!fs.existsSync(gtfsFile)) {
-      process.stdout.write(gtfsFile + ' does not exist!\n')
+    if (!fs.existsSync(otpFile)) {
+      process.stdout.write(otpFile + ' does not exist!\n')
       p.reject()
     } else {
       if (!fs.existsSync(`${dataDir}/tmp`)) {
@@ -23,9 +23,9 @@ function testGTFS (gtfsFile, quiet = false) {
       }
       fs.mkdtemp(`${dataDir}/tmp/router-build-test`, (err, folder) => {
         if (err) throw err
-        process.stdout.write('Testing ' + gtfsFile + ' in directory ' + folder + '...\n')
+        process.stdout.write('Testing ' + otpFile + ' in directory ' + folder + '...\n')
         const dir = folder.split('/').pop()
-        const r = fs.createReadStream(gtfsFile)
+        const r = fs.createReadStream(otpFile)
         r.on('end', () => {
           try {
             const build = exec(`docker run --rm -v ${hostDataDir}/tmp:/opt/opentripplanner/graphs --entrypoint /bin/bash hsldevcom/opentripplanner:${testTag} -c "java -Xmx10G -jar otp-shaded.jar --build graphs/${dir} "`,
@@ -34,12 +34,12 @@ function testGTFS (gtfsFile, quiet = false) {
               if (c === 0) {
                 resolve(true)
                 global.OTPacceptsFile = true
-                process.stdout.write(gtfsFile + ' Test SUCCESS\n')
+                process.stdout.write(otpFile + ' Test SUCCESS\n')
               } else {
                 const log = lastLog.join('')
-                process.stdout.write(gtfsFile + ` Test FAILED (${c})\n`)
-                process.stdout.write(gtfsFile + ': ' + lastLog.join('') + '\n')
-                postSlackMessage(`${gtfsFile} test failed: ${log} :boom:`)
+                process.stdout.write(otpFile + ` Test FAILED (${c})\n`)
+                process.stdout.write(otpFile + ': ' + lastLog.join('') + '\n')
+                postSlackMessage(`${otpFile} test failed: ${log} :boom:`)
                 resolve(false)
               }
               fse.removeSync(folder)
@@ -64,14 +64,14 @@ function testGTFS (gtfsFile, quiet = false) {
             })
           } catch (e) {
             const log = lastLog.join('')
-            process.stdout.write(gtfsFile + ` Test FAILED (${e})\n`)
-            process.stdout.write(gtfsFile + ': ' + log + '\n')
-            postSlackMessage(`${gtfsFile} test failed: ${log} :boom:`)
+            process.stdout.write(otpFile + ` Test FAILED (${e})\n`)
+            process.stdout.write(otpFile + ': ' + log + '\n')
+            postSlackMessage(`${otpFile} test failed: ${log} :boom:`)
             fse.removeSync(folder)
             reject(e)
           }
         })
-        r.pipe(fs.createWriteStream(`${folder}/${gtfsFile.split('/').pop()}`))
+        r.pipe(fs.createWriteStream(`${folder}/${otpFile.split('/').pop()}`))
       })
     }
   })
@@ -79,10 +79,10 @@ function testGTFS (gtfsFile, quiet = false) {
 }
 
 module.exports = {
-  testGTFSFile: () => {
+  testOTPFile: () => {
     return through.obj(function (file, encoding, callback) {
-      const gtfsFile = file.history[file.history.length - 1]
-      testGTFS(gtfsFile, true).then((success) => {
+      const otpFile = file.history[file.history.length - 1]
+      testWithOTP(otpFile, true).then((success) => {
         if (success) {
           callback(null, file)
         } else {
