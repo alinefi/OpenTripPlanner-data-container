@@ -61,7 +61,7 @@ async function update () {
     }
   }
   if (!global.OTPacceptsFile) {
-    postSlackMessage('OSM data update failed, using old version :boom:')
+    postSlackMessage('OSM data update failed, using previous version :boom:')
   }
 
   await every(updateGTFS, function (task, callback) {
