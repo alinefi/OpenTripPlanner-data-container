@@ -33,6 +33,7 @@ function testGTFS (gtfsFile, quiet = false) {
             build.on('exit', function (c) {
               if (c === 0) {
                 resolve(true)
+                global.OTPacceptsFile = true
                 process.stdout.write(gtfsFile + ' Test SUCCESS\n')
               } else {
                 const log = lastLog.join('')

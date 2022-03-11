@@ -51,6 +51,7 @@ async function update () {
 
   for (let i = 0; i < 3; i++) {
     global.blobSizeOk = false // ugly hack but gulp does not return any values from tasks
+    global.OTPacceptsFile = false
 
     await every(updateOSM, function (task, callback) {
       start(task).then(() => { callback(null, true) })
@@ -59,8 +60,9 @@ async function update () {
       break
     }
   }
-
-  // postSlackMessage('OSM data updated');
+  if (!global.OTPacceptsFile) {
+    postSlackMessage('OSM data update failed, using old version :boom:')
+  }
 
   await every(updateGTFS, function (task, callback) {
     start(task).then(() => { callback(null, true) })
