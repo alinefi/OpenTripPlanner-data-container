@@ -59,9 +59,9 @@ async function update () {
     if (global.blobSizeOk) {
       break
     }
-    if (i<2) {
+    if (i < 2) {
       // sleep 10 mins before next attempt
-      await new Promise(resolve => setTimeout(resolve, 600000));
+      await new Promise(resolve => setTimeout(resolve, 600000))
     }
   }
 
