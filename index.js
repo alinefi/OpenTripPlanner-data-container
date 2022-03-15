@@ -59,7 +59,12 @@ async function update () {
     if (global.blobSizeOk) {
       break
     }
+    if (i<2) {
+      // sleep 10 mins before next attempt
+      await new Promise(resolve => setTimeout(resolve, 600000));
+    }
   }
+
   if (!global.OTPacceptsFile) {
     postSlackMessage('OSM data update failed, using previous version :boom:')
   }
