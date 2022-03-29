@@ -109,23 +109,6 @@
       "fuzzyTripMatching": false
     },
     {
-      "id": "vantaa-bike-rental",
-      "type": "bike-rental",
-      "sourceType": "sharingos",
-      "network": "vantaa",
-      "url": "http://digitransit-proxy:8080/out/en-api.sharingos.com/v1/open_api/index.ashx?t=station_list",
-      "frequencySec": 10
-    },
-    {
-      "id": "foli-bike-rental",
-      "type": "bike-rental",
-      "sourceType": "smoove",
-      "url": "http://digitransit-proxy:8080/out/data.foli.fi/citybike/smoove",
-      "frequencySec": 10,
-      "network": "turku",
-      "allowOverloading": true
-    },
-    {
       "id": "kuopio-bike-rental",
       "type": "bike-rental",
       "sourceType": "vilkku",

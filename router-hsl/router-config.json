@@ -57,14 +57,6 @@
       "sourceType": "hsl-parkandride",
       "url": "http://digitransit-proxy:8080/out/p.hsl.fi/api/v1/facilities.json?limit=-1",
       "frequencySec": 600
-    },
-    {
-      "id": "vantaa-bike-rental",
-      "type": "bike-rental",
-      "sourceType": "sharingos",
-      "network": "vantaa",
-      "url": "http://digitransit-proxy:8080/out/en-api.sharingos.com/v1/open_api/index.ashx?t=station_list",
-      "frequencySec": 10
     }
   ]
 }
