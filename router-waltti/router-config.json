@@ -228,7 +228,7 @@
       "id": "lappeenranta-bike-rental",
       "type": "bike-rental",
       "sourceType": "gbfs",
-      "url": "https://stables.donkey.bike/api/public/gbfs/2/donkey_lappeenranta/en/",
+      "url": "http://digitransit-proxy:8080/out/stables.donkey.bike/api/public/gbfs/2/donkey_lappeenranta/en/",
       "frequencySec": 30,
       "network": "donkey_lappeenranta"
     }
