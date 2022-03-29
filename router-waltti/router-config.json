@@ -230,7 +230,8 @@
       "sourceType": "gbfs",
       "url": "http://digitransit-proxy:8080/out/stables.donkey.bike/api/public/gbfs/2/donkey_lappeenranta/en/",
       "frequencySec": 30,
-      "network": "donkey_lappeenranta"
+      "network": "donkey_lappeenranta",
+      "allowOverloading": true
     }
   ]
 }
