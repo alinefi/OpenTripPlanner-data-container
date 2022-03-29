@@ -107,24 +107,6 @@
       "fuzzyTripMatching": false
     },
     {
-      "id": "tampere-bike-rental",
-      "type": "bike-rental",
-      "sourceType": "gbfs",
-      "url": "http://digitransit-proxy:8080/out/en-admin.sharingos.com/GBFS/1048/en/",
-      "frequencySec": 10,
-      "network": "sharingos_tampere",
-      "allowOverloading": true
-    },
-    {
-      "id": "foli-bike-rental",
-      "type": "bike-rental",
-      "sourceType": "smoove",
-      "url": "http://digitransit-proxy:8080/out/data.foli.fi/citybike/smoove",
-      "frequencySec": 10,
-      "network": "turku",
-      "allowOverloading": true
-    },
-    {
       "id": "linkki-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
@@ -241,6 +223,14 @@
       "url": "http://digitransit-proxy:8080/out/koutsi.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
       "feedId": "Kouvola",
       "fuzzyTripMatching": false
+    },
+    {
+      "id": "lappeenranta-bike-rental",
+      "type": "bike-rental",
+      "sourceType": "gbfs",
+      "url": "https://stables.donkey.bike/api/public/gbfs/2/donkey_lappeenranta/en/",
+      "frequencySec": 30,
+      "network": "donkey_lappeenranta"
     }
   ]
 }
