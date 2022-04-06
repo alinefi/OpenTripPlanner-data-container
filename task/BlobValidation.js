@@ -19,7 +19,6 @@ function validateSize (seededFile, downloadedFile) {
           resolve()
         }).catch((err) => {
           process.stdout.write(downloadedFile + ': file had different size than the seeded file\n')
-          postSlackMessage(downloadedFile + ': file had different size than the seeded file')
           reject(err)
         })
     }
