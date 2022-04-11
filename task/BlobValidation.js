@@ -1,6 +1,6 @@
 const fs = require('fs')
 const through = require('through2')
-const { postSlackMessage, compareSizes } = require('../util')
+const { compareSizes } = require('../util')
 
 /**
  * Checks if downloaded file is at most 1% smaller than the seeded file.
