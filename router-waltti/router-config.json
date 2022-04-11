@@ -232,6 +232,24 @@
       "frequencySec": 30,
       "network": "donkey_lappeenranta",
       "allowOverloading": true
+    },
+    {
+      "id": "kotka-bike-rental",
+      "type": "bike-rental",
+      "sourceType": "gbfs",
+      "url": "http://digitransit-proxy:8080/out/stables.donkey.bike/api/public/gbfs/2/donkey_kotka/en/",
+      "frequencySec": 30,
+      "network": "donkey_kotka",
+      "allowOverloading": true
+    },
+    {
+      "id": "hamina-bike-rental",
+      "type": "bike-rental",
+      "sourceType": "gbfs",
+      "url": "http://digitransit-proxy:8080/out/stables.donkey.bike/api/public/gbfs/2/donkey_hamina/en/",
+      "frequencySec": 30,
+      "network": "donkey_hamina",
+      "allowOverloading": true
     }
   ]
 }
