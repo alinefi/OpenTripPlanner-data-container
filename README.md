@@ -52,6 +52,8 @@ It is possible to change the behaviour of the data builder by defining environme
   - `{"turku-alerts": {"type": "real-time-alerts", "frequencySec": 30, "url": "https://foli-beta.nanona.fi/gtfs-rt/reittiopas", "feedId": "FOLI", "fuzzyTripMatching": true, "routers": ["waltti"]}}`
   - You can remove a src by including "remove": true, `{"turku-alerts": {"remove": true, "routers": ["waltti"]}`
 * (Optional) "VERSION_CHECK" is a comma-separated list of feedIds from which the GTFS data's `feed_info.txt`'s file's `feed_version` field is parsed into a date object and it's checked if the data has been updated within the last 8 hours. If not, a message is sent to stdout (and slack, only monday-friday) to inform about usage of "old" data.
+* (Optional) "SKIPPED_SITES" defines a comma-separated list of sites from OTPQA tests that should be skipped. Example format:
+  - `"turku.digitransit.fi,reittiopas.hsl.fi"`
 
 #### Data processing steps
 
