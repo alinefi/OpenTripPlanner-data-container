@@ -259,6 +259,15 @@
       "frequencySec": 30,
       "network": "donkey_kouvola",
       "allowOverloading": true
+    },
+    {
+      "id": "tampere-bike-rental",
+      "type": "bike-rental",
+      "sourceType": "gbfs",
+      "url": "http://digitransit-proxy:8080/out/tampere-api.giravolta.io/api-opendata/gbfs/2_3/",
+      "frequencySec": 30,
+      "network": "seatcode_tampere",
+      "allowOverloading": true
     }
   ]
 }
