@@ -57,6 +57,16 @@
       "sourceType": "hsl-parkandride",
       "url": "http://digitransit-proxy:8080/out/p.hsl.fi/api/v1/facilities.json?limit=-1",
       "frequencySec": 600
+    },
+    {
+      "id": "vantaa-bike-rental",
+      "type": "bike-rental",
+      "sourceType": "gbfs",
+      "url": "http://digitransit-proxy:8080/out/vantaa-api.giravolta.io/api-opendata/gbfs/2_3/",
+      "frequencySec": 30,
+      "network": "seatcode_vantaa",
+      "allowOverloading": true,
+      "missesFileExtension": true
     }
   ]
 }
