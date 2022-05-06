@@ -225,6 +225,23 @@
       "fuzzyTripMatching": false
     },
     {
+      "id": "kotka-trip-updates",
+      "type": "stop-time-updater",
+      "frequencySec": 60,
+      "sourceType": "gtfs-http",
+      "url": "http://digitransit-proxy:8080/out/jonnejaminne.mattersoft.fi/api/gtfsrealtime/v1.0/feed/tripupdate",
+      "feedId": "Kotka",
+      "fuzzyTripMatching": false
+    },
+    {
+      "id": "kotka-alerts",
+      "type": "real-time-alerts",
+      "frequencySec": 30,
+      "url": "http://digitransit-proxy:8080/out/jonnejaminne.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
+      "feedId": "Kotka",
+      "fuzzyTripMatching": false
+    },
+    {
       "id": "lappeenranta-bike-rental",
       "type": "bike-rental",
       "sourceType": "gbfs",
