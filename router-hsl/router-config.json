@@ -64,7 +64,7 @@
       "sourceType": "gbfs",
       "url": "http://digitransit-proxy:8080/out/vantaa-api.giravolta.io/api-opendata/gbfs/2_3/",
       "frequencySec": 30,
-      "network": "seatcode_vantaa",
+      "network": "vantaa",
       "allowOverloading": true,
       "missesFileExtension": true
     }
