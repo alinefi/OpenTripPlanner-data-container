@@ -278,6 +278,15 @@
       "allowOverloading": true
     },
     {
+      "id": "turku-bike-rental",
+      "type": "bike-rental",
+      "sourceType": "gbfs",
+      "url": "http://digitransit-proxy:8080/out/stables.donkey.bike/api/public/gbfs/2/donkey_turku/en/",
+      "frequencySec": 30,
+      "network": "donkey_turku",
+      "allowOverloading": true
+    },
+    {
       "id": "tampere-bike-rental",
       "type": "bike-rental",
       "sourceType": "gbfs",
