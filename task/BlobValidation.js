@@ -12,6 +12,10 @@ function validateSize (seededFile, downloadedFile) {
       process.stdout.write(downloadedFile + ' does not exist!\n')
       p.reject()
     } else {
+      if (process.env.DISABLE_BLOB_VALIDATION) {
+        global.blobSizeOk = true
+        resolve()
+      }
       let downloadedFileSize = fs.statSync(downloadedFile).size
       compareSizes(seededFile, downloadedFileSize, 0.01)
         .then(() => {

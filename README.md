@@ -54,6 +54,7 @@ It is possible to change the behaviour of the data builder by defining environme
 * (Optional) "VERSION_CHECK" is a comma-separated list of feedIds from which the GTFS data's `feed_info.txt`'s file's `feed_version` field is parsed into a date object and it's checked if the data has been updated within the last 8 hours. If not, a message is sent to stdout (and slack, only monday-friday) to inform about usage of "old" data.
 * (Optional) "SKIPPED_SITES" defines a comma-separated list of sites from OTPQA tests that should be skipped. Example format:
   - `"turku.digitransit.fi,reittiopas.hsl.fi"`
+* (Optional) "DISABLE_BLOB_VALIDATION" should be included if blob (OSM) validation should be disabled temporarily.
 
 #### Data processing steps
 
