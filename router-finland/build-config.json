@@ -1,6 +1,5 @@
 {
   "areaVisibility": true,
   "parentStopLinking": true,
-  "osmWayPropertySet": "finland",
-  "staticParkAndRide": false
+  "osmWayPropertySet": "finland"
 }
