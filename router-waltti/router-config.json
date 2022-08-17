@@ -1,4 +1,5 @@
 {
+  "timeZone": "Europe/Helsinki",
   "routingDefaults": {
       "walkSpeed": 1.3,
       "transferSlack": 120,

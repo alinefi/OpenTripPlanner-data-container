@@ -1,4 +1,5 @@
 {
+  "timeZone": "Europe/Helsinki",
   "timeouts": [20, 20, 20],
   "routingDefaults": {
     "walkSpeed": 1.3,
