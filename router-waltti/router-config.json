@@ -242,23 +242,6 @@
       "fuzzyTripMatching": false
     },
     {
-      "id": "rovaniemi-trip-updates",
-      "type": "stop-time-updater",
-      "frequencySec": 60,
-      "sourceType": "gtfs-http",
-      "url": "https://linkkari.mattersoft.fi/api/gtfsrealtime/v1.0/feed/tripupdate",
-      "feedId": "Rovaniemi",
-      "fuzzyTripMatching": false
-    },
-    {
-      "id": "rovaniemi-alerts",
-      "type": "real-time-alerts",
-      "frequencySec": 30,
-      "url": "https://linkkari.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
-      "feedId": "Rovaniemi",
-      "fuzzyTripMatching": false
-    },
-    {
       "id": "lappeenranta-bike-rental",
       "type": "bike-rental",
       "sourceType": "gbfs",
