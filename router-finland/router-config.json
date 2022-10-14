@@ -149,6 +149,15 @@
       "sourceType": "hsl-parkandride",
       "url": "http://digitransit-proxy:8080/out/p.hsl.fi/api/v1/facilities.json?limit=-1",
       "frequencySec": 600
+    },
+    {
+      "id": "digitraffic-trip-updates",
+      "type": "stop-time-updater",
+      "frequencySec": 60,
+      "sourceType": "gtfs-http",
+      "url": "http://digitransit-proxy:8080/out/rata.digitraffic.fi/api/v1/trains/gtfs-rt-updates",
+      "feedId": "digitraffic",
+      "fuzzyTripMatching": false
     }
   ],
   "boardTimes": {
