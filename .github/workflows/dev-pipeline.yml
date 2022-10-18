@@ -32,7 +32,7 @@ jobs:
     if: github.ref == 'refs/heads/v2'
     needs:
       - lint
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [10.x]
