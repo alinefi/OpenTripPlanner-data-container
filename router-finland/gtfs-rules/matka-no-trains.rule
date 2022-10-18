@@ -1,2 +1,0 @@
-# All trains
-{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4"}}
