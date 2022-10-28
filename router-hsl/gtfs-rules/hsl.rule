@@ -1,2 +1,3 @@
 # Remove shape_dist_traveled from shapes.txt
 {"op":"update", "match":{"file":"shapes.txt", }, "update":{"shape_dist_traveled":-999.0}}
+{"op":"update", "match":{"file":"stop_times.txt", }, "update":{"shape_dist_traveled":-999.0}}
