@@ -11,8 +11,7 @@ const src = (id, url, fit, rules, requestOptions) => ({ id, url, fit, rules, req
 const HSL_CONFIG = {
   'id': 'hsl',
   'src': [
-    src('HSL', 'https://infopalvelut.storage.hsldev.com/gtfs/hsl.zip', false),
-    src('HSLlautta', 'http://lautta.net/db/gtfs_pk/gtfs.zip', false)
+    src('HSL', 'https://infopalvelut.storage.hsldev.com/gtfs/hsl.zip', false)
   ],
   'osm': 'hsl',
   'dem': 'hsl'
@@ -25,7 +24,6 @@ const FINLAND_CONFIG = {
     src('MATKA', 'https://gtfsdatav2.blob.core.windows.net/gtfsdata-blob/matka.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-finland/gtfs-rules/matka.rule']),
     src('tampere', 'http://ekstrat.tampere.fi/ekstrat/ptdata/tamperefeed_deprecated.zip', false),
     src('LINKKI', 'https://tvv.fra1.digitaloceanspaces.com/209.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash'),
-    src('lautta', 'http://lautta.net/db/gtfs/gtfs.zip', false),
     src('OULU', 'https://assets.oulunliikenne.fi/gtfs_google/google_transit.zip', false),
     src('digitraffic', 'https://rata.digitraffic.fi/api/v1/trains/gtfs-passenger-stops.zip', false, undefined, { gzip: true })
   ],
