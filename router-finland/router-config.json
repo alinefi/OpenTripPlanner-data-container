@@ -158,6 +158,23 @@
       "url": "http://digitransit-proxy:8080/out/rata.digitraffic.fi/api/v1/trains/gtfs-rt-updates",
       "feedId": "digitraffic",
       "fuzzyTripMatching": false
+    },
+    {
+      "id": "rauma-trip-updates",
+      "type": "stop-time-updater",
+      "frequencySec": 60,
+      "sourceType": "gtfs-http",
+      "url": "http://digitransit-proxy:8080/out/rauma.mattersoft.fi/api/gtfsrealtime/v1.0/feed/tripupdate",
+      "feedId": "Rauma",
+      "fuzzyTripMatching": false
+    },
+    {
+      "id": "rauma-alerts",
+      "type": "real-time-alerts",
+      "frequencySec": 30,
+      "url": "http://digitransit-proxy:8080/out/rauma.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
+      "feedId": "Rauma",
+      "fuzzyTripMatching": false
     }
   ],
   "boardTimes": {
