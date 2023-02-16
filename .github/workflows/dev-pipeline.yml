@@ -1,11 +1,11 @@
-name: Process v3 push or pr
+name: Process otp2-benchmarking push or pr
 on:
   push:
     branches:
-      - v3
+      - otp2-benchmarking
   pull_request:
     branches:
-      - v3
+      - otp2-benchmarking
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -29,7 +29,7 @@ jobs:
       - name: Run linters
         run: npm run test
   docker-push:
-    if: github.ref == 'refs/heads/v3'
+    if: github.ref == 'refs/heads/otp2-benchmarking'
     needs:
       - lint
     runs-on: ubuntu-latest
@@ -54,9 +54,9 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm install
-      - name: Build docker image from v3 and push it
+      - name: Build docker image from otp2-benchmarking and push it
         run: ./.github/workflows/scripts/build_and_push_dev.sh
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
           DOCKER_AUTH: ${{ secrets.DOCKER_AUTH }}
-          DOCKER_BASE_TAG: v3
+          DOCKER_BASE_TAG: otp2-benchmarking

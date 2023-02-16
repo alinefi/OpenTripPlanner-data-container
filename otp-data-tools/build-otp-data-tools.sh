@@ -49,5 +49,5 @@ cd ..
 # shellcheck disable=2015
 git clone https://github.com/HSLdevcom/OTPQA.git && \
   cd OTPQA && \
-  git checkout v3
+  git checkout otp2-benchmarking
 cd ..
