@@ -34,7 +34,7 @@
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
-      "url": "http://digitransit-proxy:8080/out/92.62.36.215/RTIX/trip-updates",
+      "url": "http://digitransit-proxy:8080/out/oulu.mattersoft.fi/api/gtfsrealtime/v1.0/feed/tripupdate",
       "feedId": "OULU",
       "fuzzyTripMatching": false
     },
@@ -42,7 +42,7 @@
       "id": "oulu-alerts",
       "type": "real-time-alerts",
       "frequencySec": 30,
-      "url": "http://digitransit-proxy:8080/out/92.62.36.215/RTIX/service-alerts",
+      "url": "http://digitransit-proxy:8080/out/oulu.mattersoft.fi/api/gtfsrealtime/v1.0/feed/servicealert",
       "feedId": "OULU",
       "fuzzyTripMatching": false
     },
