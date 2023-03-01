@@ -15,12 +15,14 @@ CONTAINER=opentripplanner-data-container
 DOCKER_IMAGE=$ORG/$CONTAINER-$ROUTER_NAME
 DOCKER_TEST_IMAGE=$DOCKER_IMAGE:test
 
+if [ -z "$SKIPPED_SITES" ] || [ $SKIPPED_SITES != "all" ]; then
+    echo "*** Testing $ROUTER_NAME..."
+    ./test.sh $ROUTER_NAME $TEST_TAG $TOOLS_TAG $SKIPPED_SITES
+    echo "*** $ROUTER_NAME tests passed"
+else
+    echo "*** Skipping all tests"
+fi
 
-echo "*** Testing $ROUTER_NAME..."
-
-./test.sh $ROUTER_NAME $TEST_TAG $TOOLS_TAG $SKIPPED_SITES
-
-echo "*** $ROUTER_NAME tests passed"
 docker login -u $DOCKER_USER -p $DOCKER_AUTH
 
 if [ -v DOCKER_TAG ] && [ "$DOCKER_TAG" != "undefined" ]; then
