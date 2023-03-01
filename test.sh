@@ -27,6 +27,12 @@ docker rmi --force $DOCKER_IMAGE || true
 cd data/build/$ROUTER_NAME
 echo "Building data-container image..."
 docker build -t $DOCKER_IMAGE -f Dockerfile.data-container .
+
+if [ -n "$SKIPPED_SITES" ] && [ $SKIPPED_SITES == "all" ]; then
+    echo "*** Skipping all tests"
+    exit 0
+fi
+
 echo -e "\n##### Testing $ROUTER_NAME ($DOCKER_IMAGE)#####\n"
 
 echo "Starting data container..."
