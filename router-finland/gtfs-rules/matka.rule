@@ -1,7 +1,25 @@
 # Stops at 0 of some coordinate system
 {"op":"remove", "match":{"file":"stops.txt","stop_lon":"20.142573"}}
 # All trains
-{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"2"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"100"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"101"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"102"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"103"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"104"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"105"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"106"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"107"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"108"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"109"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"110"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"111"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"112"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"113"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"114"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"115"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"116"}}
+{"op":"remove", "match":{"file":"routes.txt", "route_type":"117"}}
 # HSL
 {"op":"remove", "match":{"file":"agency.txt", "agency_id":"2"}}
 # Tampere old
