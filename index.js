@@ -4,7 +4,7 @@ require('./gulpfile')
 const { promisify } = require('util')
 const everySeries = require('async/everySeries')
 const { execFileSync } = require('child_process')
-const { postSlackMessage } = require('./util')
+const { postSlackMessage, updateSlackMessage } = require('./util')
 const CronJob = require('cron').CronJob
 
 const every = promisify((list, task, cb) => {
@@ -42,7 +42,12 @@ start('seed').then(() => {
 })
 
 async function update () {
-  postSlackMessage('Starting data build')
+  const slackResponse = await postSlackMessage('Starting data build', null)
+  let messageTimeStamp;
+  if (slackResponse.ok) {
+    messageTimeStamp = slackResponse.ts
+  }
+
   setCurrentConfig(routers.join(',')) // restore used config
 
   await every(updateDEM, function (task, callback) {
@@ -95,9 +100,16 @@ async function update () {
             stdio: [0, 1, 2]
           }
         )
-        postSlackMessage(`${router} data updated.`)
+        // Update parent message to state OK if everything went okay
+        if (messageTimeStamp) {
+          updateSlackMessage(`${router} data updated. :white_check_mark:`, messageTimeStamp)
+        }
       } catch (E) {
-        postSlackMessage(`${router} data update failed: ` + E.message)
+        // If an error occurs, reply with error message to thread and update parent message to state NOT OK
+        if (messageTimeStamp) {
+          postSlackMessage(`${router} data update failed: ` + E.message, messageTimeStamp)
+          updateSlackMessage("Something went wrong with the data update. More information in the reply. :boom:", messageTimeStamp)
+        }
       }
       callback(null, true)
     })
