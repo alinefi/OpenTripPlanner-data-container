@@ -30,57 +30,57 @@ const zipWithGlob = (zipFile, glob, zipDir, cb) => {
   })
 }
 
-async function postSlackMessage(messageText, parentMessageTimeStamp) {
+async function postSlackMessage (messageText, parentMessageTimeStamp) {
   try {
     const response = await promisifiedRequest({
-        method: 'POST',
-        url: 'https://slack.com/api/chat.postMessage',
-        headers: {
-            'Authorization': `Bearer ${process.env.SLACK_ACCESS_TOKEN}`,
-            'Content-Type': 'application/json',
-            'Accept': '*/*'
-        },
-        json: {
-            channel: process.env.SLACK_CHANNEL_ID, 
-            text: messageText,
-            username: `OTP data builder ${process.env.BUILDER_TYPE || 'dev'}`,
-            thread_ts: parentMessageTimeStamp // either null (will be a new message) or pointing to parent message (will be a reply) 
-        }
+      method: 'POST',
+      url: 'https://slack.com/api/chat.postMessage',
+      headers: {
+        'Authorization': `Bearer ${process.env.SLACK_ACCESS_TOKEN}`,
+        'Content-Type': 'application/json',
+        'Accept': '*/*'
+      },
+      json: {
+        channel: process.env.SLACK_CHANNEL_ID,
+        text: messageText,
+        username: `OTP data builder ${process.env.BUILDER_TYPE || 'dev'}`,
+        thread_ts: parentMessageTimeStamp // either null (will be a new message) or pointing to parent message (will be a reply)
+      }
     })
 
     // Return the response, it contains information such as the message timestamp that is needed to reply to messages
     return response.body
-  } catch(e) {
-      // Something went wrong in the Slack-cycle... log it and continue build
-      process.stdout.write(`Something went wrong when trying to send message to Slack: ${e}\n`)   
-      return e
+  } catch (e) {
+    // Something went wrong in the Slack-cycle... log it and continue build
+    process.stdout.write(`Something went wrong when trying to send message to Slack: ${e}\n`)
+    return e
   }
 }
 
-async function updateSlackMessage(messageText, messageTimeStamp) {
+async function updateSlackMessage (messageText, messageTimeStamp) {
   try {
     const response = await promisifiedRequest({
-        method: 'POST',
-        url: 'https://slack.com/api/chat.update',
-        headers: {
-            'Authorization': `Bearer ${process.env.SLACK_ACCESS_TOKEN}`,
-            'Content-Type': 'application/json',
-            'Accept': '*/*'
-        },
-        json: {
-            channel: process.env.SLACK_CHANNEL_ID, 
-            text: messageText,
-            username: `OTP data builder ${process.env.BUILDER_TYPE || 'dev'}`,
-            ts: messageTimeStamp
-        }
+      method: 'POST',
+      url: 'https://slack.com/api/chat.update',
+      headers: {
+        'Authorization': `Bearer ${process.env.SLACK_ACCESS_TOKEN}`,
+        'Content-Type': 'application/json',
+        'Accept': '*/*'
+      },
+      json: {
+        channel: process.env.SLACK_CHANNEL_ID,
+        text: messageText,
+        username: `OTP data builder ${process.env.BUILDER_TYPE || 'dev'}`,
+        ts: messageTimeStamp
+      }
     })
 
     // Return the response, it contains information such as the message timestamp that is needed to reply to messages
     return response.body
-  } catch(e) {
-      // Something went wrong in the Slack-cycle... log it and continue build
-      process.stdout.write(`Something went wrong when trying to update Slack message: ${e}\n`)   
-      return e
+  } catch (e) {
+    // Something went wrong in the Slack-cycle... log it and continue build
+    process.stdout.write(`Something went wrong when trying to update Slack message: ${e}\n`)
+    return e
   }
 }
 

@@ -43,7 +43,7 @@ start('seed').then(() => {
 
 async function update () {
   const slackResponse = await postSlackMessage('Starting data build', null)
-  let messageTimeStamp;
+  let messageTimeStamp
   if (slackResponse.ok) {
     messageTimeStamp = slackResponse.ts
   }
@@ -108,7 +108,7 @@ async function update () {
         // If an error occurs, reply with error message to thread and update parent message to state NOT OK
         if (messageTimeStamp) {
           postSlackMessage(`${router} data update failed: ` + E.message, messageTimeStamp)
-          updateSlackMessage("Something went wrong with the data update. More information in the reply. :boom:", messageTimeStamp)
+          updateSlackMessage('Something went wrong with the data update. More information in the reply. :boom:', messageTimeStamp)
         }
       }
       callback(null, true)
