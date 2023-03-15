@@ -36,5 +36,8 @@ cd gtfs_shape_mapfit
 make -C pymapmatch
 cd ..
 
-git clone https://github.com/HSLdevcom/OTPQA.git
+git clone https://github.com/HSLdevcom/OTPQA.git && \
+  cd OTPQA && \
+  git checkout v2
+cd ..
 
