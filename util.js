@@ -2,9 +2,9 @@ const JSZip = require('jszip')
 const fs = require('fs')
 const globby = require('globby')
 
-const IncomingWebhook = require('@slack/client').IncomingWebhook
-const url = process.env.SLACK_WEBHOOK_URL || null
-const webhook = url !== null ? new IncomingWebhook(url, { username: `OTP data builder ${process.env.BUILDER_TYPE || 'dev'}`, channel: 'digitransit-ci' }) : null
+const request = require('request')
+const { promisify } = require('util')
+const promisifiedRequest = promisify(request)
 
 /**
  * zipFile file to create
@@ -30,19 +30,58 @@ const zipWithGlob = (zipFile, glob, zipDir, cb) => {
   })
 }
 
-const postSlackMessage = (message) => {
-  if (webhook === null) {
-    process.stdout.write(`Not sending to slack: ${message}\n`)
-    return
+async function postSlackMessage (messageText, parentMessageTimeStamp) {
+  try {
+    const response = await promisifiedRequest({
+      method: 'POST',
+      url: 'https://slack.com/api/chat.postMessage',
+      headers: {
+        'Authorization': `Bearer ${process.env.SLACK_ACCESS_TOKEN}`,
+        'Content-Type': 'application/json',
+        'Accept': '*/*'
+      },
+      json: {
+        channel: process.env.SLACK_CHANNEL_ID,
+        text: messageText,
+        username: `OTP data builder ${process.env.BUILDER_TYPE || 'dev'}`,
+        thread_ts: parentMessageTimeStamp // either null (will be a new message) or pointing to parent message (will be a reply)
+      }
+    })
+
+    // Return the response, it contains information such as the message timestamp that is needed to reply to messages
+    return response.body
+  } catch (e) {
+    // Something went wrong in the Slack-cycle... log it and continue build
+    process.stdout.write(`Something went wrong when trying to send message to Slack: ${e}\n`)
+    return e
   }
+}
 
-  process.stdout.write(`Sending to slack: ${message}\n`)
+async function updateSlackMessage (messageText, messageTimeStamp) {
+  try {
+    const response = await promisifiedRequest({
+      method: 'POST',
+      url: 'https://slack.com/api/chat.update',
+      headers: {
+        'Authorization': `Bearer ${process.env.SLACK_ACCESS_TOKEN}`,
+        'Content-Type': 'application/json',
+        'Accept': '*/*'
+      },
+      json: {
+        channel: process.env.SLACK_CHANNEL_ID,
+        text: messageText,
+        username: `OTP data builder ${process.env.BUILDER_TYPE || 'dev'}`,
+        ts: messageTimeStamp
+      }
+    })
 
-  webhook.send(message, function (err) {
-    if (err) {
-      process.stdout.write(`ERROR sending to slack: ${err}\n`)
-    }
-  })
+    // Return the response, it contains information such as the message timestamp that is needed to reply to messages
+    return response.body
+  } catch (e) {
+    // Something went wrong in the Slack-cycle... log it and continue build
+    process.stdout.write(`Something went wrong when trying to update Slack message: ${e}\n`)
+    return e
+  }
 }
 
 /**
@@ -72,5 +111,6 @@ module.exports = {
   zipWithGlob,
   routerDir: (config) => `router-${config.id}`,
   postSlackMessage,
+  updateSlackMessage,
   compareSizes
 }
