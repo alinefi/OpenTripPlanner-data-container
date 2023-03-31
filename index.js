@@ -97,15 +97,11 @@ async function update () {
           }
         )
         // Update parent message to state OK if everything went okay
-        if (messageTimeStamp) {
-          updateSlackMessage(`${router} data updated. :white_check_mark:`)
-        }
+        updateSlackMessage(`${router} data updated. :white_check_mark:`)
       } catch (E) {
         // If an error occurs, reply with error message to thread and update parent message to state NOT OK
-        if (messageTimeStamp) {
-          postSlackMessage(`${router} data update failed: ` + E.message)
-          updateSlackMessage('Something went wrong with the data update. More information in the reply. :boom:')
-        }
+        postSlackMessage(`${router} data update failed: ` + E.message)
+        updateSlackMessage('Something went wrong with the data update. More information in the reply. :boom:')
       }
       callback(null, true)
     })
