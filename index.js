@@ -42,10 +42,9 @@ start('seed').then(() => {
 })
 
 async function update () {
-  const slackResponse = await postSlackMessage('Starting data build', null)
-  let messageTimeStamp
+  const slackResponse = await postSlackMessage('Starting data build')
   if (slackResponse.ok) {
-    messageTimeStamp = slackResponse.ts
+    global.messageTimeStamp = slackResponse.ts
   }
 
   setCurrentConfig(routers.join(',')) // restore used config
@@ -78,10 +77,7 @@ async function update () {
     start(task).then(() => { callback(null, true) })
   })
 
-  // postSlackMessage('GTFS data updated');
-
   await every(routers, function (router, callback) {
-    // postSlackMessage(`Starting build & deploy for ${router}...`);
     setCurrentConfig(router)
     start('router:buildGraph').then(() => {
       try {
@@ -102,18 +98,16 @@ async function update () {
         )
         // Update parent message to state OK if everything went okay
         if (messageTimeStamp) {
-          updateSlackMessage(`${router} data updated. :white_check_mark:`, messageTimeStamp)
+          updateSlackMessage(`${router} data updated. :white_check_mark:`)
         }
       } catch (E) {
         // If an error occurs, reply with error message to thread and update parent message to state NOT OK
         if (messageTimeStamp) {
-          postSlackMessage(`${router} data update failed: ` + E.message, messageTimeStamp)
-          updateSlackMessage('Something went wrong with the data update. More information in the reply. :boom:', messageTimeStamp)
+          postSlackMessage(`${router} data update failed: ` + E.message)
+          updateSlackMessage('Something went wrong with the data update. More information in the reply. :boom:')
         }
       }
       callback(null, true)
     })
   })
-
-  // postSlackMessage('Data build completed');
 }
