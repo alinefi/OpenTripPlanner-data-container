@@ -40,24 +40,6 @@
       "allowOverloading": true
     },
     {
-      "id": "matka-trip-updates",
-      "type": "stop-time-updater",
-      "frequencySec": 60,
-      "sourceType": "gtfs-http",
-      "url": "http://digitransit-proxy:8080/out/tyokalu.navici.com/joukkoliikenne/manual-gtfsrt/api/gtfsrt/updates",
-      "feedId": "MATKA",
-      "fuzzyTripMatching": true
-    },
-    {
-      "id": "matka-alerts",
-      "type": "real-time-alerts",
-      "frequencySec": 60,
-      "sourceType": "gtfs-http",
-      "url": "http://digitransit-proxy:8080/out/tyokalu.navici.com/joukkoliikenne/manual-gtfsrt/api/gtfsrt/alerts",
-      "feedId": "MATKA",
-      "fuzzyTripMatching": true
-    },
-    {
       "id": "oulu-trip-updates",
       "type": "stop-time-updater",
       "frequencySec": 60,
