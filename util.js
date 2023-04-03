@@ -30,7 +30,7 @@ const zipWithGlob = (zipFile, glob, zipDir, cb) => {
   })
 }
 
-async function postSlackMessage (messageText, parentMessageTimeStamp) {
+async function postSlackMessage (messageText) {
   try {
     const response = await promisifiedRequest({
       method: 'POST',
@@ -44,7 +44,7 @@ async function postSlackMessage (messageText, parentMessageTimeStamp) {
         channel: process.env.SLACK_CHANNEL_ID,
         text: messageText,
         username: `OTP data builder ${process.env.BUILDER_TYPE || 'dev'}`,
-        thread_ts: parentMessageTimeStamp // either null (will be a new message) or pointing to parent message (will be a reply)
+        thread_ts: global.messageTimeStamp // either null (will be a new message) or pointing to parent message (will be a reply)
       }
     })
 
@@ -57,7 +57,7 @@ async function postSlackMessage (messageText, parentMessageTimeStamp) {
   }
 }
 
-async function updateSlackMessage (messageText, messageTimeStamp) {
+async function updateSlackMessage (messageText) {
   try {
     const response = await promisifiedRequest({
       method: 'POST',
@@ -71,7 +71,7 @@ async function updateSlackMessage (messageText, messageTimeStamp) {
         channel: process.env.SLACK_CHANNEL_ID,
         text: messageText,
         username: `OTP data builder ${process.env.BUILDER_TYPE || 'dev'}`,
-        ts: messageTimeStamp
+        ts: global.messageTimeStamp
       }
     })
 
