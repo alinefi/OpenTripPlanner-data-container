@@ -1,6 +1,6 @@
 const fs = require('fs')
 const { exec, execSync } = require('child_process')
-const { zipWithGlob, postSlackMessage, optMatching } = require('../util')
+const { zipWithGlob, postSlackMessage, otpMatching } = require('../util')
 const { dataDir, hostDataDir, constants } = require('../config.js')
 const graphBuildTag = process.env.OTP_TAG || 'latest'
 
