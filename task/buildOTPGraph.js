@@ -1,13 +1,12 @@
-const otpMatching = require('otp-matching')
-const { zipWithGlob } = require('../util')
 const fs = require('fs')
+const { exec, execSync } = require('child_process')
+const { zipWithGlob, postSlackMessage, otpMatching } = require('../util')
 const { dataDir, hostDataDir, constants } = require('../config.js')
-const { postSlackMessage } = require('../util')
 const graphBuildTag = process.env.OTP_TAG || 'latest'
+
 /*
  * node.js wrapper for building OTP graph
  */
-const { exec, execSync } = require('child_process')
 
 const buildGraph = function (config) {
   let lastLog = []
@@ -99,7 +98,7 @@ module.exports = {
             }
           })
         })
-        return Promise.all([p1, p2, p3]).then(() => otpMatching(`${dataDir}/build/${config.id}/router`, config.id))
+        return Promise.all([p1, p2, p3]).then(() => otpMatching(`${dataDir}/build/${config.id}/router`))
       })
     })).then(() => {
       process.stdout.write('Created SUCCESS\n')
