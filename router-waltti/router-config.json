@@ -286,15 +286,6 @@
       "allowOverloading": true
     },
     {
-      "id": "hamina-bike-rental",
-      "type": "bike-rental",
-      "sourceType": "gbfs",
-      "url": "http://digitransit-proxy:8080/out/stables.donkey.bike/api/public/gbfs/2/donkey_hamina/en/",
-      "frequencySec": 30,
-      "network": "donkey_hamina",
-      "allowOverloading": true
-    },
-    {
       "id": "kouvola-bike-rental",
       "type": "bike-rental",
       "sourceType": "gbfs",
