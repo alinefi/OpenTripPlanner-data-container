@@ -12,8 +12,7 @@ const HSL_CONFIG = {
   'id': 'hsl',
   'src': [
     src('HSL', 'https://infopalvelut.storage.hsldev.com/gtfs/hsl.zip', false),
-    src('HSLlautta', 'https://koontikartta.navici.com/tiedostot/gtfs_lautat_digitransit.zip', false),
-    src('Pika', 'https://gtfsdata.blob.core.windows.net/hsl/hsl.zip', false)
+    src('HSLlautta', 'https://koontikartta.navici.com/tiedostot/gtfs_lautat_digitransit.zip', false)
   ],
   'osm': 'hsl',
   'dem': 'hsl'
