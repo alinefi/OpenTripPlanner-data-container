@@ -22,7 +22,7 @@ function OBAFilter (src, dst, rule) {
   const p = new Promise((resolve) => {
     let success = true
     let lastLog = []
-    const cmd = `docker pull ${dataToolImage}; docker run -v ${hostDataDir}:/data --rm ${dataToolImage} java -Xmx6g -jar one-busaway-gtfs-transformer/onebusaway-gtfs-transformer-cli.jar --transform=/data/${rule} /data/${src} /data/${dst}`
+    const cmd = `docker pull ${dataToolImage}; docker run -v ${dataDir}:/data --rm ${dataToolImage} java -Xmx6g -jar onebusaway-gtfs-transformer-cli.jar --transform=/data/${rule} /data/${src} /data/${dst}`
     const filterProcess = exec(cmd)
 
     const checkError = (data) => {

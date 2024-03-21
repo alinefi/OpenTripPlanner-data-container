@@ -21,9 +21,6 @@ wget https://bootstrap.pypa.io/pip/2.7/get-pip.py && \
   pip install cffi && \
   pip install utm
 
-mkdir -p one-busaway-gtfs-transformer && \
-  wget -O one-busaway-gtfs-transformer/onebusaway-gtfs-transformer-cli.jar "http://nexus.onebusaway.org/service/local/artifact/maven/content?r=public&g=org.onebusaway&a=onebusaway-gtfs-transformer-cli&v=1.3.9"
-
 git clone https://github.com/jswhit/pyproj.git
 cd pyproj
 git checkout ec9151e8c6909f7fac72bb2eab927ff18fa4cf1d

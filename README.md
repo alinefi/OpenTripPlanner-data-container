@@ -117,6 +117,6 @@ Each data container image runs a http server listening to port 8080, serving bot
 - finland: http://localhost:8080/router-finland.zip and graph-finland-<otpversion>.zip
 
 ### otp-data-tools
-Contains tools for gtfs manipulation, such as One Bus Away gtfs filter.
-These tools are packaged inside docker container and are used dunring the data build process.
+Contains tools for gtfs manipulation, such as One Bus Away gtfs filter. OBA filter tool version 1.3.9 is embedded into this repository.
+It should be replaced with a newer version if such one appears e.g. into https://mvnrepository.com/.
 
