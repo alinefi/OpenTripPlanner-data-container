@@ -17,7 +17,7 @@
       "type": "stop-time-updater",
       "frequencySec": 60,
       "sourceType": "gtfs-http",
-      "url": "http://digitransit-proxy:8080/out/rata.digitraffic.fi/api/v1/trains/gtfs-rt-updates",
+      "url": "https://rata.digitraffic.fi/api/v1/trains/gtfs-rt-updates",
       "feedId": "digitraffic",
       "fuzzyTripMatching": false
     },
