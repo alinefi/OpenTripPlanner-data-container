@@ -8,62 +8,21 @@
  */
 const src = (id, url, fit, rules, requestOptions) => ({ id, url, fit, rules, requestOptions })
 
-const HSL_CONFIG = {
-  'id': 'hsl',
+const CITYAPP_CONFIG = {
+  'id': 'cityapp',
   'src': [
-    src('HSL', 'https://infopalvelut.storage.hsldev.com/gtfs/hsl.zip', false)
-    // src('HSLlautta', 'https://koontikartta.navici.com/tiedostot/gtfs_lautat_digitransit.zip', false)
-  ],
-  'osm': 'hsl',
-  'dem': 'hsl'
-}
-
-const FINLAND_CONFIG = {
-  'id': 'finland',
-  'src': [
-    src('HSL', 'https://infopalvelut.storage.hsldev.com/gtfs/hsl.zip', false, ['router-finland/gtfs-rules/hsl-no-trains.rule']),
-    src('MATKA', 'https://gtfsdatav2.blob.core.windows.net/gtfsdata-blob/matka.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-finland/gtfs-rules/matka.rule']),
-    src('tampere', 'http://ekstrat.tampere.fi/ekstrat/ptdata/tamperefeed_deprecated.zip', false),
-    src('LINKKI', 'https://tvv.fra1.digitaloceanspaces.com/209.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash'),
-    src('OULU', 'https://tvv.fra1.digitaloceanspaces.com/229.zip', false),
-    src('digitraffic', 'https://rata.digitraffic.fi/api/v1/trains/gtfs-passenger-stops.zip', false, undefined, { gzip: true }),
-    src('Rauma', 'http://digitransit-proxy:8080/out/raumaadmin.mattersoft.fi/feeds/233.zip', false),
-    src('Pori', 'https://tvv.fra1.digitaloceanspaces.com/231.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule'])
+    src('Pori', 'https://tvv.fra1.digitaloceanspaces.com/231.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash'),
+    src('Lyttylan_Liikenne', 'https://koontikartta.navici.com/tiedostot/rae/lyttylan_liikenne_oy.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash'),
+    src('Rauma', 'https://api.digitransit.fi/routing-data/v3/finland/Rauma-gtfs.zip?digitransit-subscription-key=8a9488cc7c8c46e1b098798b3de81137', 'gtfs_shape_mapfit/fit_gtfs_stops.bash'),
+    src('Harman_Liikenne_Seinajoki', 'https://harmanliikenne.bussikaista.fi/sites/harma/files/gtfs/export/palvelut/SJK_latest.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash'),
   ],
   'osm': 'finland'
-}
-
-const WALTTI_CONFIG = {
-
-  'id': 'waltti',
-  'src': [
-    src('Hameenlinna', 'https://tvv.fra1.digitaloceanspaces.com/203.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
-    src('Kajaani', 'https://tvv.fra1.digitaloceanspaces.com/211.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
-    src('Kotka', 'https://tvv.fra1.digitaloceanspaces.com/217.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
-    src('Kouvola', 'https://tvv.fra1.digitaloceanspaces.com/219.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
-    src('Lappeenranta', 'https://tvv.fra1.digitaloceanspaces.com/225.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
-    src('Mikkeli', 'https://tvv.fra1.digitaloceanspaces.com/227.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
-    src('Vaasa', 'https://tvv.fra1.digitaloceanspaces.com/249.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
-    src('Joensuu', 'https://tvv.fra1.digitaloceanspaces.com/207.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
-    src('FOLI', 'http://data.foli.fi/gtfs/gtfs.zip', false, ['router-waltti/gtfs-rules/waltti.rule']),
-    src('Lahti', 'https://tvv.fra1.digitaloceanspaces.com/223.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
-    src('Kuopio', 'http://karttapalvelu.kuopio.fi/google_transit/google_transit.zip', false, ['router-waltti/gtfs-rules/waltti.rule']),
-    src('OULU', 'https://tvv.fra1.digitaloceanspaces.com/229.zip', false),
-    src('LINKKI', 'https://tvv.fra1.digitaloceanspaces.com/209.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash'),
-    src('tampere', 'http://ekstrat.tampere.fi/ekstrat/ptdata/tamperefeed_deprecated.zip', false),
-    src('Rovaniemi', 'https://tvv.fra1.digitaloceanspaces.com/237.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule']),
-    src('digitraffic', 'https://rata.digitraffic.fi/api/v1/trains/gtfs-passenger-stops.zip', false, undefined, { gzip: true }),
-    src('tampereDRT', 'https://ekstrat.tampere.fi/ekstrat/ptdata/tamperefeed_kutsuliikenne.zip', false),
-    src('Pori', 'https://tvv.fra1.digitaloceanspaces.com/231.zip', 'gtfs_shape_mapfit/fit_gtfs_stops.bash', ['router-waltti/gtfs-rules/waltti.rule'])
-  ],
-  'osm': 'finland',
-  'dem': 'waltti'
 }
 
 let ALL_CONFIGS
 
 const setCurrentConfig = (name) => {
-  ALL_CONFIGS = [WALTTI_CONFIG, HSL_CONFIG, FINLAND_CONFIG].reduce((acc, nxt) => {
+  ALL_CONFIGS = [CITYAPP_CONFIG].reduce((acc, nxt) => {
     if ((name && name.split(',').indexOf(nxt.id) !== -1) ||
       name === undefined) {
       acc.push(nxt)
@@ -128,14 +87,10 @@ const configMap = ALL_CONFIGS.map(cfg => cfg.src)
   }, {})
 
 const osm = [
-  { id: 'finland', url: 'https://karttapalvelu.storage.hsldev.com/finland.osm/finland.osm.pbf' },
-  { id: 'hsl', url: 'https://karttapalvelu.storage.hsldev.com/hsl.osm/hsl.osm.pbf' }
-]
+  { id: 'finland', url: 'https://karttapalvelu.storage.hsldev.com/finland.osm/finland.osm.pbf' }
+];
 
-const dem = [
-  { id: 'waltti', url: 'https://elevdata.blob.core.windows.net/elevation/waltti/waltti-10m-elevation-model_20190927.tif' },
-  { id: 'hsl', url: 'https://elevdata.blob.core.windows.net/elevation/hsl/hsl-10m-elevation-model_20190920.tif' }
-]
+const dem = [];
 
 const constants = {
   BUFFER_SIZE: 1024 * 1024 * 32
@@ -148,7 +103,7 @@ module.exports = {
   osmMap: osm.reduce((acc, val) => { acc[val.id] = val; return acc }, {}),
   dem,
   demMap: dem.reduce((acc, val) => { acc[val.id] = val; return acc }, {}),
-  dataToolImage: `hsldevcom/otp-data-tools:${process.env.TOOLS_TAG || 'latest'}`,
+  dataToolImage: `appisdev/otp-data-tools:${process.env.TOOLS_TAG || 'latest'}`,
   dataDir: process.env.DATA || `${process.cwd()}/data`,
   hostDataDir: process.env.HOST_DATA || `${process.cwd()}/data`,
   setCurrentConfig: setCurrentConfig,

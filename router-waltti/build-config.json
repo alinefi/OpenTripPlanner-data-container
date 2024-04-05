@@ -1,8 +1,0 @@
-{
-  "areaVisibility": true,
-  "parentStopLinking": true,
-  "staticParkAndRide": false,
-  "osmWayPropertySet": "finland",
-  "fares": "HSL",
-  "elevationUnitMultiplier": 0.1
-}

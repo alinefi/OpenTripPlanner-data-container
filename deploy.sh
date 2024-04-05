@@ -10,7 +10,7 @@ set -e
 ROUTER_NAME=${1:-hsl}
 DATE=$(date +"%Y-%m-%dT%H.%M.%S")
 
-ORG=${ORG:-hsldevcom}
+ORG=${ORG:-appisdev}
 CONTAINER=opentripplanner-data-container
 DOCKER_IMAGE=$ORG/$CONTAINER-$ROUTER_NAME
 DOCKER_TEST_IMAGE=$DOCKER_IMAGE:test

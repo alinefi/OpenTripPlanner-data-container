@@ -146,7 +146,7 @@ gulp.task('dem:seed', gulp.series('dem:del', function () {
  * continuous flow of data into production when one or more updated data files
  * are broken.
  */
-gulp.task('seed', gulp.series('dem:seed', 'osm:seed', 'gtfs:seed'))
+gulp.task('seed', gulp.series('osm:seed', 'gtfs:seed'))
 
 gulp.task('router:del', () => del([`${config.dataDir}/build`]))
 
@@ -156,8 +156,6 @@ gulp.task('router:copy', gulp.series('router:del', function () {
 
 gulp.task('router:buildGraph', gulp.series('router:copy', function () {
   gulp.src(['otp-data-container/*', 'otp-data-container/.*'])
-    .pipe(gulp.dest(`${config.dataDir}/build/waltti`))
-    .pipe(gulp.dest(`${config.dataDir}/build/finland`))
-    .pipe(gulp.dest(`${config.dataDir}/build/hsl`))
+    .pipe(gulp.dest(`${config.dataDir}/build/cityapp`))
   return buildOTPGraphTask(config.ALL_CONFIGS())
 }))

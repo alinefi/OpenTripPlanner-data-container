@@ -1,2 +1,0 @@
-# Remove all trains from HSL gtfs
-{"op":"remove", "match":{"file":"routes.txt", "route_type":"109"}}
